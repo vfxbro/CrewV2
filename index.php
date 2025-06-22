@@ -1,6 +1,7 @@
 <?php
 $page_title = 'Startseite';
 $meta_description = 'Wir schaffen Verbindungen, die Zukunft gestalten. Individuelle Personalvermittlung - Wir bringen Fachkräfte und Unternehmen gezielt zusammen.';
+$meta_keywords = getSetting('default_keywords', 'Personalvermittlung, Jobs, Karriere, Fachkräfte, Stellenvermittlung');
 
 require_once 'includes/header.php';
 
@@ -42,8 +43,8 @@ $slides = getAllSlides(true);
             </div>
             <div class="col-lg-6">
                 <div class="hero-image text-center animate-fade-in-delay-2">
-                    <img src="<?php echo SITE_URL; ?>/assets/images/hero-image.jpg" 
-                         alt="Personalvermittlung" 
+                    <img src="<?php echo SITE_URL . '/' . getSetting('hero_image', 'assets/images/hero-image.jpg'); ?>"
+                         alt="Personalvermittlung"
                          class="img-fluid rounded-3 shadow-lg">
                 </div>
             </div>
@@ -292,18 +293,24 @@ $slides = getAllSlides(true);
 
 <!-- CTA Section -->
 <section class="cta-section py-5 bg-primary text-white">
+    <?php
+        $cta_title = getSetting('cta_title', 'Bereit für den nächsten Schritt?');
+        $cta_text = getSetting('cta_text', 'Vereinbaren Sie noch heute einen kostenlosen Beratungstermin und lassen Sie uns gemeinsam Ihre berufliche Zukunft gestalten.');
+        $cta_button_text = getSetting('cta_button_text', 'Jetzt Termin buchen');
+        $cta_button_url = getSetting('cta_button_url', SITE_URL . '/booking.php');
+    ?>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h2 class="h2 fw-bold mb-3">Bereit für den nächsten Schritt?</h2>
+                <h2 class="h2 fw-bold mb-3"><?php echo escape($cta_title); ?></h2>
                 <p class="lead mb-0">
-                    Vereinbaren Sie noch heute einen kostenlosen Beratungstermin und lassen Sie uns gemeinsam Ihre berufliche Zukunft gestalten.
+                    <?php echo escape($cta_text); ?>
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-light btn-lg px-4">
+                <a href="<?php echo escape($cta_button_url); ?>" class="btn btn-light btn-lg px-4">
                     <i class="fas fa-calendar-alt me-2"></i>
-                    Jetzt Termin buchen
+                    <?php echo escape($cta_button_text); ?>
                 </a>
             </div>
         </div>
