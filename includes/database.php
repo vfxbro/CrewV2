@@ -111,6 +111,7 @@ class Database {
                 content LONGTEXT,
                 meta_title VARCHAR(255),
                 meta_description TEXT,
+                meta_keywords TEXT,
                 is_active BOOLEAN DEFAULT TRUE,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -225,7 +226,17 @@ class Database {
             ['contact_address', 'Musterstraße 123, 12345 Berlin', 'text'],
             ['footer_text', '© 2025 Crew of Experts GmbH. Alle Rechte vorbehalten.', 'text'],
             ['booking_enabled', '1', 'text'],
-            ['jobs_per_page', '10', 'text']
+            ['jobs_per_page', '10', 'text'],
+            ['cta_title', 'Bereit für den nächsten Schritt?', 'text'],
+            ['cta_text', 'Vereinbaren Sie noch heute einen kostenlosen Beratungstermin und lassen Sie uns gemeinsam Ihre berufliche Zukunft gestalten.', 'text'],
+            ['cta_button_text', 'Jetzt Termin buchen', 'text'],
+            ['cta_button_url', SITE_URL . '/booking.php', 'text'],
+            ['default_keywords', 'Personalvermittlung, Jobs, Karriere, Fachkräfte, Stellenvermittlung', 'text'],
+            ['logo', 'assets/images/logo.png', 'image'],
+            ['logo_white', 'assets/images/logo-white.png', 'image'],
+            ['favicon', 'assets/images/favicon.ico', 'image'],
+            ['apple_icon', 'assets/images/apple-touch-icon.png', 'image'],
+            ['hero_image', 'assets/images/hero-image.jpg', 'image']
         ];
 
         foreach ($defaultSettings as $setting) {
