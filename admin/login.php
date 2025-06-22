@@ -2,6 +2,14 @@
 require_once '../includes/config.php';
 require_once '../includes/database.php';
 
+// Handle language switching
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['de', 'en'])) {
+    $_SESSION['admin_language'] = $_GET['lang'];
+}
+
+// Language detection
+$admin_lang = $_SESSION['admin_language'] ?? 'de';
+
 // Redirect if already logged in
 if (check_admin_auth()) {
     redirect('dashboard.php');
@@ -46,9 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
     }
 }
-
-// Language detection
-$admin_lang = $_SESSION['admin_language'] ?? 'de';
 
 // Translations
 $translations = [

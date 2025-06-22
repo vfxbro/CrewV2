@@ -19,7 +19,9 @@ $error = '';
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action'])) {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $error = 'Ungültiger Sicherheits-Token.';
+    } elseif (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'add':
             case 'edit':
@@ -522,6 +524,7 @@ include 'includes/admin_header.php';
                                 <?php else: ?>
                                     <form id="bulkForm" method="POST">
                                         <input type="hidden" name="action" value="bulk_action">
+                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                         
                                         <!-- Bulk Actions -->
                                         <div class="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
@@ -613,6 +616,7 @@ include 'includes/admin_header.php';
                                                                 <form method="POST" class="d-inline">
                                                                     <input type="hidden" name="action" value="update_status">
                                                                     <input type="hidden" name="id" value="<?php echo $booking['id']; ?>">
+                                                                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                     <select name="status" class="form-select form-select-sm status-select" 
                                                                             onchange="if(confirm('<?php echo $admin_lang === 'de' ? 'Status ändern?' : 'Change status?'; ?>')) this.form.submit()">
                                                                         <option value="pending" <?php echo $booking['status'] === 'pending' ? 'selected' : ''; ?>><?php echo $t['pending']; ?></option>
@@ -638,10 +642,11 @@ include 'includes/admin_header.php';
                                                                        title="<?php echo $t['edit']; ?>">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
-                                                                    <form method="POST" class="d-inline" 
+                                                                    <form method="POST" class="d-inline"
                                                                           onsubmit="return confirm('<?php echo $t['confirm_delete']; ?>')">
                                                                         <input type="hidden" name="action" value="delete">
                                                                         <input type="hidden" name="id" value="<?php echo $booking['id']; ?>">
+                                                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                         <button type="submit" class="btn btn-sm btn-outline-danger" 
                                                                                 title="<?php echo $t['delete']; ?>">
                                                                             <i class="fas fa-trash"></i>
@@ -749,6 +754,7 @@ include 'includes/admin_header.php';
                             <div class="card-body">
                                 <form method="POST" class="needs-validation" novalidate>
                                     <input type="hidden" name="action" value="<?php echo $action; ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                     
                                     <div class="row">
                                         <!-- Customer Information -->

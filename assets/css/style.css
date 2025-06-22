@@ -568,6 +568,9 @@ body {
 }
 
 /* Admin Panel Styles */
+.admin-header, .admin-sidebar, .admin-content {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .admin-sidebar {
     background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     min-height: 100vh;
