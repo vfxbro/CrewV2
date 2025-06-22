@@ -17,7 +17,9 @@ if (isset($_GET['logged_out'])) {
 
 // Handle login
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    if ($_POST['action'] === 'login') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $error_message = 'Ungültiger Sicherheits-Token.';
+    } elseif ($_POST['action'] === 'login') {
         $username = trim($_POST['username'] ?? '');
         $password = trim($_POST['password'] ?? '');
         
@@ -237,6 +239,7 @@ $t = $translations[$admin_lang];
                 
                 <form method="POST" class="needs-validation" novalidate>
                     <input type="hidden" name="action" value="login">
+                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                     
                     <!-- Username -->
                     <div class="mb-3">
