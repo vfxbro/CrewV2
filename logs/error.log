@@ -1,0 +1,38 @@
+2025-06-21 23:09:17 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'your_username'@'localhost' (using password: YES)
+2025-06-21 23:09:20 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'your_username'@'localhost' (using password: YES)
+2025-06-21 23:11:17 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-21 23:11:20 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-21 23:11:23 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-21 23:11:25 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-21 23:12:34 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-22 06:04:59 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-22 06:56:01 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user '9A7sR#0VP6(D8#l('@'localhost' (using password: YES)
+2025-06-22 07:05:39 - Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'dbdelfhoorjeuh'@'localhost' (using password: YES)
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.jobs' doesn't exist
+2025-06-22 07:06:45 - Select query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.jobs' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.jobs' doesn't exist
+2025-06-22 07:06:45 - Select query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.slides' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 07:06:45 - SelectOne query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.settings' doesn't exist
+2025-06-22 08:49:54 - Select query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.slides' doesn't exist
+2025-06-22 08:50:24 - Select query failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbdelfhoorjeuh.slides' doesn't exist

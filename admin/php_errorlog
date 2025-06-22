@@ -1,0 +1,23 @@
+[22-Jun-2025 07:08:45 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: array_column(): Argument #1 ($array) must be of type array, bool given in /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php:548
+Stack trace:
+#0 /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php(548): array_column(false, 'jobs_count')
+#1 {main}
+  thrown in /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php on line 548
+[22-Jun-2025 07:10:40 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: array_column(): Argument #1 ($array) must be of type array, bool given in /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php:548
+Stack trace:
+#0 /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php(548): array_column(false, 'jobs_count')
+#1 {main}
+  thrown in /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php on line 548
+[22-Jun-2025 07:13:59 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: array_column(): Argument #1 ($array) must be of type array, bool given in /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php:548
+Stack trace:
+#0 /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php(548): array_column(false, 'jobs_count')
+#1 {main}
+  thrown in /home/customer/www/old.softmed.com.au/public_html/admin/dashboard.php on line 548
+[22-Jun-2025 08:42:10 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Database" not found in /home/customer/www/old.softmed.com.au/public_html/admin/test_lang.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/old.softmed.com.au/public_html/admin/test_lang.php on line 13
+[22-Jun-2025 08:42:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Database" not found in /home/customer/www/old.softmed.com.au/public_html/admin/test_lang.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/old.softmed.com.au/public_html/admin/test_lang.php on line 13
