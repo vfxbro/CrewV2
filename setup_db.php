@@ -32,6 +32,21 @@ try {
             UNIQUE KEY `username` (`username`),
             UNIQUE KEY `email` (`email`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+        "CREATE TABLE IF NOT EXISTS `pages` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `slug` varchar(100) NOT NULL,
+            `title` varchar(255) NOT NULL,
+            `content` longtext,
+            `meta_title` varchar(255) DEFAULT NULL,
+            `meta_description` text,
+            `meta_keywords` text,
+            `is_active` tinyint(1) DEFAULT '1',
+            `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`),
+            UNIQUE KEY `slug` (`slug`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
         
         "CREATE TABLE IF NOT EXISTS `jobs` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,6 +77,21 @@ try {
             `booking_time` time NOT NULL,
             `message` text,
             `status` enum('pending','confirmed','cancelled') DEFAULT 'pending',
+            `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+
+        "CREATE TABLE IF NOT EXISTS `slides` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `title` varchar(255) DEFAULT NULL,
+            `subtitle` varchar(255) DEFAULT NULL,
+            `description` text,
+            `image_url` varchar(500) DEFAULT NULL,
+            `button_text` varchar(100) DEFAULT NULL,
+            `button_url` varchar(500) DEFAULT NULL,
+            `sort_order` int(11) DEFAULT '0',
+            `is_active` tinyint(1) DEFAULT '1',
             `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`)
