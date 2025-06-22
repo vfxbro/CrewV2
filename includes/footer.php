@@ -8,7 +8,7 @@
                 <div class="col-lg-4">
                     <div class="footer-section">
                         <h5 class="fw-bold mb-3">
-                            <img src="<?php echo SITE_URL; ?>/assets/images/logo-white.png" alt="<?php echo escape($site_title); ?>" height="30" class="me-2">
+                            <img src="<?php echo SITE_URL . '/' . getSetting('logo_white', 'assets/images/logo-white.png'); ?>" alt="<?php echo escape($site_title); ?>" height="30" class="me-2">
                             <?php echo escape($site_title); ?>
                         </h5>
                         <p class="text-light mb-3">

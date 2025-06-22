@@ -19,7 +19,9 @@ $error = '';
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action'])) {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $error = 'Ungültiger Sicherheits-Token.';
+    } elseif (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'add':
             case 'edit':
@@ -333,6 +335,7 @@ include 'includes/admin_header.php';
                                                             <form method="POST" class="d-inline" onsubmit="return confirm('<?php echo $admin_lang === 'de' ? 'Status ändern?' : 'Change status?'; ?>')">
                                                                 <input type="hidden" name="action" value="toggle_status">
                                                                 <input type="hidden" name="id" value="<?php echo $job['id']; ?>">
+                                                                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                 <button type="submit" class="btn btn-sm <?php echo $job['is_active'] ? 'btn-success' : 'btn-secondary'; ?>">
                                                                     <?php echo $job['is_active'] ? $t['active'] : $t['inactive']; ?>
                                                                 </button>
@@ -342,6 +345,7 @@ include 'includes/admin_header.php';
                                                             <form method="POST" class="d-inline" onsubmit="return confirm('<?php echo $admin_lang === 'de' ? 'Featured-Status ändern?' : 'Change featured status?'; ?>')">
                                                                 <input type="hidden" name="action" value="toggle_featured">
                                                                 <input type="hidden" name="id" value="<?php echo $job['id']; ?>">
+                                                                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                 <button type="submit" class="btn btn-sm <?php echo $job['featured'] ? 'btn-warning' : 'btn-outline-warning'; ?>">
                                                                     <i class="fas fa-star"></i>
                                                                 </button>
@@ -368,6 +372,7 @@ include 'includes/admin_header.php';
                                                                 <form method="POST" class="d-inline" onsubmit="return confirm('<?php echo $t['confirm_delete']; ?>')">
                                                                     <input type="hidden" name="action" value="delete">
                                                                     <input type="hidden" name="id" value="<?php echo $job['id']; ?>">
+                                                                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="<?php echo $t['delete']; ?>">
                                                                         <i class="fas fa-trash"></i>
                                                                     </button>
@@ -399,6 +404,7 @@ include 'includes/admin_header.php';
                             <div class="card-body">
                                 <form method="POST" class="needs-validation" novalidate>
                                     <input type="hidden" name="action" value="<?php echo $action; ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                     
                                     <div class="row">
                                         <!-- Basic Information -->

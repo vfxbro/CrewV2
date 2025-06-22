@@ -2,6 +2,14 @@
 require_once '../includes/config.php';
 require_once '../includes/database.php';
 
+// Handle language switching
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['de', 'en'])) {
+    $_SESSION['admin_language'] = $_GET['lang'];
+}
+
+// Language detection
+$admin_lang = $_SESSION['admin_language'] ?? 'de';
+
 // Redirect if already logged in
 if (check_admin_auth()) {
     redirect('dashboard.php');
@@ -17,7 +25,9 @@ if (isset($_GET['logged_out'])) {
 
 // Handle login
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    if ($_POST['action'] === 'login') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $error_message = 'Ungültiger Sicherheits-Token.';
+    } elseif ($_POST['action'] === 'login') {
         $username = trim($_POST['username'] ?? '');
         $password = trim($_POST['password'] ?? '');
         
@@ -44,9 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
     }
 }
-
-// Language detection
-$admin_lang = $_SESSION['admin_language'] ?? 'de';
 
 // Translations
 $translations = [
@@ -237,6 +244,7 @@ $t = $translations[$admin_lang];
                 
                 <form method="POST" class="needs-validation" novalidate>
                     <input type="hidden" name="action" value="login">
+                    <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                     
                     <!-- Username -->
                     <div class="mb-3">

@@ -13,7 +13,8 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($page_title) ? escape($page_title) . ' - ' : ''; ?><?php echo escape($site_title); ?></title>
     <meta name="description" content="<?php echo isset($meta_description) ? escape($meta_description) : escape($site_description); ?>">
-    <meta name="keywords" content="Personalvermittlung, Jobs, Karriere, Fachkräfte, Stellenvermittlung">
+    <?php $default_keywords = getSetting('default_keywords', 'Personalvermittlung, Jobs, Karriere, Fachkräfte, Stellenvermittlung'); ?>
+    <meta name="keywords" content="<?php echo isset($meta_keywords) ? escape($meta_keywords) : escape($default_keywords); ?>">
     <meta name="author" content="<?php echo escape($site_title); ?>">
     
     <!-- Open Graph / Facebook -->
@@ -31,8 +32,8 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
     <meta property="twitter:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo SITE_URL; ?>/assets/images/favicon.ico">
-    <link rel="apple-touch-icon" href="<?php echo SITE_URL; ?>/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="<?php echo SITE_URL . '/' . getSetting('favicon', 'assets/images/favicon.ico'); ?>">
+    <link rel="apple-touch-icon" href="<?php echo SITE_URL . '/' . getSetting('apple_icon', 'assets/images/apple-touch-icon.png'); ?>">
 
     <!-- CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +48,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
         "name": "<?php echo escape($site_title); ?>",
         "description": "<?php echo escape($site_description); ?>",
         "url": "<?php echo SITE_URL; ?>",
-        "logo": "<?php echo SITE_URL; ?>/assets/images/logo.png",
+        "logo": "<?php echo SITE_URL . '/' . getSetting('logo', 'assets/images/logo.png'); ?>",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "<?php echo getSetting('contact_phone', '+49 123 456 7890'); ?>",
@@ -73,7 +74,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center" href="<?php echo SITE_URL; ?>">
-                <img src="<?php echo SITE_URL; ?>/assets/images/logo.png" alt="<?php echo escape($site_title); ?>" height="40" class="me-2">
+                <img src="<?php echo SITE_URL . '/' . getSetting('logo', 'assets/images/logo.png'); ?>" alt="<?php echo escape($site_title); ?>" height="40" class="me-2">
                 <span class="fw-bold text-primary d-none d-sm-inline"><?php echo escape($site_title); ?></span>
             </a>
             

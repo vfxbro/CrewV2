@@ -19,7 +19,9 @@ $error = '';
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action'])) {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $error = 'Ungültiger Sicherheits-Token.';
+    } elseif (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'mark_read':
                 if ($contact_id && markContactAsRead($contact_id)) {
@@ -450,6 +452,7 @@ include 'includes/admin_header.php';
                                 <?php else: ?>
                                     <form id="bulkForm" method="POST">
                                         <input type="hidden" name="action" value="bulk_action">
+                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                         
                                         <!-- Bulk Actions -->
                                         <div class="d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
@@ -546,10 +549,11 @@ include 'includes/admin_header.php';
                                                                             title="<?php echo $t['reply']; ?>">
                                                                         <i class="fas fa-reply"></i>
                                                                     </button>
-                                                                    <form method="POST" class="d-inline" 
+                                                                    <form method="POST" class="d-inline"
                                                                           onsubmit="return confirm('<?php echo $t['confirm_delete']; ?>')">
                                                                         <input type="hidden" name="action" value="delete">
                                                                         <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
+                                                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                         <button type="submit" class="btn btn-sm btn-outline-danger" 
                                                                                 title="<?php echo $t['delete']; ?>">
                                                                             <i class="fas fa-trash"></i>
@@ -573,6 +577,7 @@ include 'includes/admin_header.php';
                                                                     <form method="POST">
                                                                         <input type="hidden" name="action" value="reply">
                                                                         <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
+                                                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                                                         <div class="modal-body">
                                                                             <div class="row g-3">
                                                                                 <div class="col-12">
@@ -717,16 +722,18 @@ include 'includes/admin_header.php';
                                     <form method="POST" class="d-inline">
                                         <input type="hidden" name="action" value="mark_read">
                                         <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
+                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                         <button type="submit" class="btn btn-success w-100">
                                             <i class="fas fa-check me-2"></i><?php echo $t['mark_read']; ?>
                                         </button>
                                     </form>
                                     <?php endif; ?>
                                     
-                                    <form method="POST" class="d-inline" 
+                                    <form method="POST" class="d-inline"
                                           onsubmit="return confirm('<?php echo $t['confirm_delete']; ?>')">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
+                                        <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                         <button type="submit" class="btn btn-outline-danger w-100">
                                             <i class="fas fa-trash me-2"></i><?php echo $t['delete']; ?>
                                         </button>
@@ -776,6 +783,7 @@ include 'includes/admin_header.php';
                             <form method="POST">
                                 <input type="hidden" name="action" value="reply">
                                 <input type="hidden" name="id" value="<?php echo $contact['id']; ?>">
+                                <input type="hidden" name="csrf_token" value="<?php echo generate_csrf_token(); ?>">
                                 <div class="modal-body">
                                     <div class="row g-3">
                                         <div class="col-12">

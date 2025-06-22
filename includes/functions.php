@@ -39,18 +39,34 @@ function getAllPages() {
     return $db->select("SELECT * FROM pages ORDER BY title");
 }
 
+function getPageById($id) {
+    $db = Database::getInstance();
+    return $db->selectOne("SELECT * FROM pages WHERE id = ?", [$id]);
+}
+
+function deletePage($id) {
+    $db = Database::getInstance();
+    return $db->execute("DELETE FROM pages WHERE id = ?", [$id]);
+}
+
 function savePage($data) {
     $db = Database::getInstance();
     
     if (isset($data['id']) && $data['id']) {
         return $db->execute(
-            "UPDATE pages SET title = ?, content = ?, meta_title = ?, meta_description = ?, is_active = ?, updated_at = NOW() WHERE id = ?",
-            [$data['title'], $data['content'], $data['meta_title'], $data['meta_description'], $data['is_active'], $data['id']]
+            "UPDATE pages SET title = ?, content = ?, meta_title = ?, meta_description = ?, meta_keywords = ?, is_active = ?, updated_at = NOW() WHERE id = ?",
+            [
+                $data['title'], $data['content'], $data['meta_title'],
+                $data['meta_description'], $data['meta_keywords'], $data['is_active'], $data['id']
+            ]
         );
     } else {
         return $db->execute(
-            "INSERT INTO pages (slug, title, content, meta_title, meta_description, is_active) VALUES (?, ?, ?, ?, ?, ?)",
-            [$data['slug'], $data['title'], $data['content'], $data['meta_title'], $data['meta_description'], $data['is_active']]
+            "INSERT INTO pages (slug, title, content, meta_title, meta_description, meta_keywords, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [
+                $data['slug'], $data['title'], $data['content'],
+                $data['meta_title'], $data['meta_description'], $data['meta_keywords'], $data['is_active']
+            ]
         );
     }
 }
@@ -254,28 +270,49 @@ function uploadFile($file, $directory = 'uploads/') {
     if (!isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
         return false;
     }
-    
-    // Проверяем размер файла
+
     if ($file['size'] > MAX_FILE_SIZE) {
         return false;
     }
-    
-    // Создаем директорию если не существует
-    $upload_dir = UPLOAD_PATH . $directory;
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime  = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    $allowed_mimes = [
+        'image/jpeg', 'image/png', 'image/gif',
+        'image/webp', 'image/svg+xml', 'image/x-icon'
+    ];
+    if (!in_array($mime, $allowed_mimes)) {
+        return false;
+    }
+
+    $upload_dir = UPLOAD_PATH . basename($directory);
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
-    
-    // Генерируем уникальное имя файла
-    $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $file_name = uniqid() . '.' . $file_extension;
-    $file_path = $upload_dir . $file_name;
-    
-    // Перемещаем файл
-    if (move_uploaded_file($file['tmp_name'], $file_path)) {
-        return $directory . $file_name;
+
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $safe_exts = ['jpg','jpeg','png','gif','webp','svg','ico'];
+    if (!in_array($extension, $safe_exts)) {
+        $map = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'image/webp' => 'webp',
+            'image/svg+xml' => 'svg',
+            'image/x-icon' => 'ico'
+        ];
+        $extension = $map[$mime] ?? 'dat';
     }
-    
+
+    $file_name = uniqid('', true) . '.' . $extension;
+    $file_path = $upload_dir . '/' . $file_name;
+
+    if (move_uploaded_file($file['tmp_name'], $file_path)) {
+        return basename($directory) . '/' . $file_name;
+    }
+
     return false;
 }
 
@@ -351,6 +388,27 @@ function generateSlug($text) {
     $text = preg_replace('/[^a-z0-9\s-]/', '', $text);
     $text = preg_replace('/[\s-]+/', '-', $text);
     return trim($text, '-');
+}
+
+// Функция для автоматической генерации ключевых слов из текста
+function generateKeywords($text, $limit = 10) {
+    $text = mb_strtolower(strip_tags($text));
+    $text = preg_replace('/[^\p{L}\p{Nd}\s]+/u', ' ', $text);
+    $words = preg_split('/\s+/', $text, -1, PREG_SPLIT_NO_EMPTY);
+    $stopwords = [
+        'und','oder','der','die','das','ein','eine','mit','auf','im','in','den',
+        'zu','für','von','ist','sie','er','wir','ich'
+    ];
+    $freq = [];
+    foreach ($words as $word) {
+        if (in_array($word, $stopwords) || mb_strlen($word) < 3) {
+            continue;
+        }
+        $freq[$word] = ($freq[$word] ?? 0) + 1;
+    }
+    arsort($freq);
+    $keywords = array_slice(array_keys($freq), 0, $limit);
+    return implode(', ', $keywords);
 }
 
 // Функция для пагинации
